@@ -52,11 +52,7 @@ export function canSpy(knightIsAwake, archerIsAwake, prisonerIsAwake) {
  * @returns {boolean} Whether or not you can send a signal to the prisoner.
  */
 export function canSignalPrisoner(archerIsAwake, prisonerIsAwake) {
-  if (prisonerIsAwake && !archerIsAwake) {
-    return true;
-  } else {
-    return false;
-  }
+  return prisonerIsAwake && !archerIsAwake;
 }
 
 /**
@@ -75,14 +71,8 @@ export function canFreePrisoner(
   prisonerIsAwake,
   petDogIsPresent
 ) {
-  if (petDogIsPresent && !archerIsAwake) {
-    return true;
-  } else if (!petDogIsPresent) {
-    if (prisonerIsAwake && !knightIsAwake && !archerIsAwake) {
-      return true;
-    }
-  } else {
-    return false;
-  }
-  return false;
+  return (
+    (petDogIsPresent && !archerIsAwake) ||
+    (!petDogIsPresent && prisonerIsAwake && !knightIsAwake && !archerIsAwake)
+  );
 }
